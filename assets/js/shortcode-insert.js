@@ -32,8 +32,8 @@ jQuery(function($){
 		$('.caldera-modal-closer').trigger('click');
 
 	});
-
-	if( wp && wp.media ){
+	/*
+	if( typeof wp !== 'undefined' && typeof wp.media !== 'undefined' ){
 
 		var media = wp.media;
 		if( typeof wp.mce.views.register === "function"){
@@ -90,6 +90,6 @@ jQuery(function($){
 				}
 			} );
 		}
-	}
+	}*/
 
 });//

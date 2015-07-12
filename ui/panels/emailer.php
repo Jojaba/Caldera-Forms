@@ -42,16 +42,24 @@ if(!isset($element['mailer']['enable_mailer'])){
 			<label><?php echo __('From Name', 'caldera-forms'); ?> </label>
 			<div class="caldera-config-field">
 				<input type="text" class="field-config magic-tag-enabled" name="config[mailer][sender_name]" value="<?php echo $element['mailer']['sender_name']; ?>" style="width:400px;">
-				<p class="description"><?php echo __('Use %field_slug% to use a value from the form', 'caldera-forms'); ?></p>
+				<p class="description"><?php echo __('Name from which the email comes', 'caldera-forms'); ?></p>
 			</div>
 		</div>
 		<div class="caldera-config-group">
 			<label><?php echo __('From Email', 'caldera-forms'); ?> </label>
 			<div class="caldera-config-field">
 				<input type="text" class="field-config magic-tag-enabled" name="config[mailer][sender_email]" value="<?php echo $element['mailer']['sender_email']; ?>" style="width:400px;">
-				<p class="description"><?php echo __('Use %field_slug% to use a value from the form', 'caldera-forms'); ?></p>
+				<p class="description"><?php echo __('Email Address from which the mail comes. Try not to use a field from the form. Rather use your own email and use a form field in the "Reply To Email" below.', 'caldera-forms'); ?></p>
 			</div>
 		</div>
+		<div class="caldera-config-group">
+			<label><?php echo __('Reply To Email', 'caldera-forms'); ?> </label>
+			<div class="caldera-config-field">
+				<input type="text" class="field-config magic-tag-enabled" name="config[mailer][reply_to]" value="<?php if(isset( $element['mailer']['reply_to'] ) ){ echo $element['mailer']['reply_to']; } ?>" style="width:400px;">
+				<p class="description"><?php echo __('The email address of the person filling in the form. This will allow the email to be replied directly to the sender.', 'caldera-forms'); ?></p>
+			</div>
+		</div>
+
 		<div class="caldera-config-group">
 			<label><?php echo __('Email Type', 'caldera-forms'); ?> </label>
 			<div class="caldera-config-field">
@@ -77,6 +85,13 @@ if(!isset($element['mailer']['enable_mailer'])){
 			</div>
 
 		</div>
+		<div class="caldera-config-group">
+			<label><?php echo __('BCC', 'caldera-forms'); ?> </label>
+			<div class="caldera-config-field">
+				<input type="text" class="field-config magic-tag-enabled" name="config[mailer][bcc_to]" value="<?php if(isset( $element['mailer']['bcc_to'] ) ){ echo $element['mailer']['bcc_to']; } ?>" style="width:400px;">
+				<p class="description"><?php echo __('Comma separated list of email addresses.', 'caldera-forms'); ?></p>
+			</div>
+		</div>
 
 		<div class="caldera-config-group">
 			<label><?php echo __('Email Subject', 'caldera-forms'); ?> </label>
@@ -89,9 +104,21 @@ if(!isset($element['mailer']['enable_mailer'])){
 			<label><?php echo __('Email Message', 'caldera-forms'); ?> </label>
 			<div class="caldera-config-field" style="max-width: 600px;">
 				<?php wp_editor( $element['mailer']['email_message'], "mailer_email_message", array('textarea_name' => 'config[mailer][email_message]') ); ?>
-				<p class="description"><?php echo __('Magic tags, %field_slug% are replaced with submitted data. use {summary} to build an automatic mail based on form content. Leaving the mailer blank, will create and automatic summary.', 'caldera-forms'); ?></p>
+				<p class="description"><?php echo __('Magic tags, %field_slug% are replaced with submitted data. Use {summary} to build an automatic mail based on form content. Leaving the mailer blank, will create and automatic summary.', 'caldera-forms'); ?></p>
 			</div>
 		</div>
+
+
+		<div class="caldera-config-group">
+			<label><?php echo __('Debug Mailer', 'caldera-forms'); ?></label>
+			<div class="caldera-config-field">
+				<label><input type="checkbox" value="1" name="config[debug_mailer]" class="field-config"<?php if(isset($element['debug_mailer'])){ echo ' checked="checked"'; } ?>> <?php echo __('Enable email send transation log', 'caldera-forms'); ?></label>
+				<p class="description"><?php echo __('If set, entries will have a "Mailer Debug" meta tab to see the transaction log. Do not keep this enabled on production as it sends two emails for tracking.', 'caldera-forms'); ?></p>
+			</div>
+		</div>
+
+		<?php do_action( 'caldera_forms_mailer_config', $element ); ?>
+
 	</div>
 </div>
 <div class="mailer-errors" style="display:none;">

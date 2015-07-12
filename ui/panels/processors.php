@@ -114,7 +114,7 @@ function processor_wrapper_template($id = '{{id}}', $type = '{{type}}', $config_
 			<input type="hidden" class="processor_config_string block-input" value="<?php echo htmlentities( $config_str ); ?>">
 			<br>
 			<br>
-			<button class="button button-primary block-button delete-processor" data-confirm="<?php echo __('Are you sure you want to remove this processor?', 'caldera-forms'); ?>" type="button"><i class="icn-delete"></i> <?php echo __('Remove Processor', 'caldera-forms'); ?></button>
+			<button class="button block-button delete-processor" data-confirm="<?php echo __('Are you sure you want to remove this processor?', 'caldera-forms'); ?>" type="button"><i class="icn-delete"></i> <?php echo __('Remove Processor', 'caldera-forms'); ?></button>
 		</div>
 		<div id="<?php echo $id; ?>_conditions_pane" style="display:none;" class="wrapper-instance-pane">
 		<p>
@@ -164,7 +164,8 @@ function build_processor_types($default = null){
 		data-modal="form_processor"
 		data-load-class="none"
 		data-modal-title="<?php echo __('Form Processors', 'caldera-forms'); ?>"
-		data-modal-height="500"
+		data-modal-height="700"
+		data-modal-width="600"
 		data-template="#form-processors-tmpl"
 		data-callback="hide_single_processors"
 		><?php echo __('Add Processor', 'caldera-forms'); ?></button>

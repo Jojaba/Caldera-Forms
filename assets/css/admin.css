@@ -434,9 +434,11 @@ li.caldera-editor-logo {
   font-style: italic;
   color: #8f8f8f;
 }
+
 .field-edit-open .field_preview {
-  background: none repeat scroll 0 0 #F7F7F7;
-  border: 1px solid #EFEFEF;
+  background: none repeat scroll 0 0 #eff5f5;
+  border: 1px solid #40a4cf;
+  border-radius: 3px;
 }
 .layout-new-form-field .field_preview {
   display: none;
@@ -686,15 +688,15 @@ a span.error-tag {
   padding: 0;
 }
 .form-admin-page-wrap {
-  margin: 50px 0 0 390px;
+  margin: 50px 0 0 430px;
 }
 .form-extend-page-wrap {
   margin: 100px 0 0 0;
 }
 .form-panel-wrap {
   float: left;
-  margin-left: -390px;
-  width: 390px;
+  margin-left: -430px;
+  width: 430px;
 }
 .form-entries-wrap {
   padding: 0 30px;
@@ -870,7 +872,7 @@ input.disabled-input {
 }
 .tab-detail-panel > h4 {
   font-weight: bold;
-  margin: 0.6em 0;
+  margin: 0 0 12px;
 }
 .tab-detail-panel > h4 small {
   color: #A9A9A9;
@@ -906,6 +908,7 @@ input.disabled-input {
 }
 #form-entries-viewer.spinner {
   display: block;
+  visibility: visible;
   float: left;
   height: 22px;
   padding: 0;
@@ -1106,6 +1109,7 @@ input.disabled-input {
 }
 .spinner.loading {
   display: inline;
+  visibility: visible;
 }
 .form-panel html {
   font-family: sans-serif;
@@ -1567,3 +1571,61 @@ input.disabled-input {
 .view_option_value{
   color: #afafaf;
 }
+
+.entry-line {
+  border-bottom: 1px solid #dddddd;
+  margin-bottom: 4px;
+}
+
+.entry-line label {
+  clear: left;
+  float: left;
+  font-weight: bold;
+  margin-bottom: 3px;
+  margin-right: 8px;
+  min-width: 130px;
+  text-transform: capitalize;
+}
+
+.entry-line > div {
+  display: inline-block;
+  margin-bottom: 4px;
+  min-width: 355px;
+}
+
+.cf-table-viewer p {
+  margin: 0 0 4px;
+}
+td.draft-form {
+  box-shadow: 2px 0 0 rgba(175, 0, 0, 0.6) inset;
+  background-color: rgba(175, 0, 0, 0.09);
+}
+td.active-form {
+  box-shadow: 2px 0 0 #a3be5f inset;
+}
+tr.form_entry_row.loading {
+  opacity: 0.5;
+}
+.caldera-editor-header .updated_notice_box {
+  background: #fff;
+  border-left: 8px solid rgb(175, 175, 0);
+  color: #333;
+  display: inline-block;
+  padding: 10px 24px 10px 12px;
+  position: absolute;
+  top: -75px;
+  box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+  z-index: 99999;
+}
+.tablenav.caldera-table-nav {
+  clear: none;
+  float: right;
+  margin: -42px 18px 0 0;
+}
+.caldera-table-nav .tablenav-pages{
+  float: left;
+}
+.caldera-table-nav .tablenav-pages .current-page{
+  width: 45px;
+}
+

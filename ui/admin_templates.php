@@ -28,7 +28,7 @@
 			</div>
 		</div>
 		
-		<div class="caldera-modal-footer" style="display: block; clear: both; position: relative; height: 27px; width: 100%; margin: 0px -12px;">
+		<div class="baldrick-modal-footer" style="display: block; clear: both; position: relative; height: 27px; width: 100%; margin: 0px -12px;">
 
 			<button type="submit" class="button button-primary" style="float:right;"><?php echo __('Import Form', 'caldera-forms'); ?></button>	
 
@@ -41,7 +41,6 @@
 	</form>
 </script>
 <script type="text/html" id="new-form-tmpl">
-	<form class="new-form-form ajax-trigger" data-action="create_form" data-active-class="disabled" data-load-class="disabled" data-callback="new_form_redirect" data-before="serialize_modal_form" data-modal-autoclose="new_form">
 		<?php
 		do_action('caldera_forms_new_form_template_start');
 		?>
@@ -61,7 +60,6 @@
 		<?php
 		do_action('caldera_forms_new_form_template_end');
 		?>
-	</form>
 </script>
 <script type="text/html" id="forms-list-alt-tmpl">
 
@@ -87,7 +85,7 @@
 						<td>{{_entry_id}}</td>
 						<td>{{_date}}</td>
 						{{#each data}}
-						<td>{{{this}}}</td>
+						<td>{{#if label}}{{value}}{{else}}{{{this}}}{{/if}}</td>
 						{{/each}}
 						<td style="text-align: right; width: 100px;"><?php do_action('caldera_forms_entry_actions'); ?></td>
 					</tr>
@@ -104,77 +102,46 @@
 </script>
 <script type="text/html" id="view-entry-tmpl">
 {{#if user}}
-<div class="modal-side-bar has-avatar">
-	<span class="user-avatar user-avatar-{{user/ID}}"{{#if user/name}} title="{{user/name}}"{{/if}}>
+	<div class="user-avatar user-avatar-{{user/ID}}"{{#if user/name}} title="{{user/name}}"{{/if}} style="margin-top:-1px;">
 	{{{user/avatar}}}
-	</span>
-	{{#if meta}}
-	<ul class="modal-side-tabs">
-		<li><a href="#main-entry-panel" class="modal-side-tab active"><?php echo __('Entry', 'caldera-forms'); ?></a></li>
-		{{#each meta}}
-			<li><a href="#meta-{{@key}}" class="modal-side-tab">{{name}}</a></li>
-		{{/each}}
-	</ul>
-	{{/if}}
-</div>
+	</div>
 {{/if}}
-<div class="form-panel{{#if user}} modal-inside{{/if}}">
-<div id="main-entry-panel" class="tab-detail-panel">
+
+	<div id="main-entry-panel" class="tab-detail-panel" data-tab="<?php _e('Entry', 'caldera-forms'); ?>">
 		<h4><?php echo __('Submitted', 'caldera-forms'); ?> <small class="description">{{date}}</small></h4>
 		<hr>
-		<table class="table table-condensed">
-		<thead>
-
-			<tr>
-				<th><?php echo __('Field', 'caldera-forms'); ?></th>
-				<th><?php echo __('Value', 'caldera-forms'); ?></th>
-			</tr>
-		</thead>
-		<tbody>
 		{{#each data}}
-			<tr>
-				<th>{{label}}</th>
-				<td>{{{view}}}</td>
-			</tr>
+			<div class="entry-line">
+				<label>{{label}}</label>
+				<div>{{#if view/label}}{{view/value}}{{else}}{{{view}}}{{/if}}&nbsp;</div>
+			</div>
 		{{/each}}
-		</tbody>
-	</table></div>
+	</div>
+
 
 	{{#if meta}}
 	{{#each meta}}
-	<div id="meta-{{@key}}" class="tab-detail-panel" style="display:none;">
+	<div id="meta-{{@key}}" data-tab="{{name}}" class="tab-detail-panel">
 	<h4>{{name}}</h4>
 	<hr>
 	{{#unless template}}
-		<table class="table table-condensed">		
-				{{#each data}}
-				<thead>
-				{{#if title}}
-				<tr>
-					<th colspan="2" class="active">{{title}}</th>
-				</tr>
-				{{/if}}
-				<tr>
-					<th><?php echo __('Field', 'caldera-forms'); ?></th>
-					<th><?php echo __('Value', 'caldera-forms'); ?></th>
-				</tr>
-				</thead>
-				<tbody>
-				{{#each entry}}		
-				<tr>
-					<th>{{meta_key}}</th>
-					<td>{{{meta_value}}}</td>
-				</tr>
-				{{/each}}
-				</tbody>
-				{{/each}}		
-		</table>
+		{{#each data}}
+			{{#if title}}
+				<h4>{{title}}</h4>
+			{{/if}}
+			{{#each entry}}
+				<div class="entry-line">
+					<label>{{meta_key}}</label>
+					<div>{{{meta_value}}}&nbsp;</div>
+				</div>
+			{{/each}}
+		{{/each}}
 	{{/unless}}
 	<?php do_action('caldera_forms_entry_meta_templates'); ?>
 	</div>
 	{{/each}}
 	{{/if}}
-</div>
+
 </script>
 <script type="text/javascript">
 

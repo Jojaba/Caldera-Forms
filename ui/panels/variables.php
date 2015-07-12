@@ -28,6 +28,7 @@ if(!isset($element['variables'])){
 				<select name="config[variables][types][]" class="field-config" style="vertical-align: baseline;">
 					<option value="static" <?php if( $element['variables']['types'][$var_index] == 'static'){ echo 'selected="selected"'; } ?>><?php echo __('Static', 'caldera-forms'); ?></option>
 					<option value="passback" <?php if( $element['variables']['types'][$var_index] == 'passback'){ echo 'selected="selected"'; } ?>><?php echo __('Passback', 'caldera-forms'); ?></option>
+					<option value="entryitem" <?php if( $element['variables']['types'][$var_index] == 'entryitem'){ echo 'selected="selected"'; } ?>><?php echo __('Entry List', 'caldera-forms'); ?></option>
 				</select>
 				&nbsp;<button type="button" class="button remove-this-variable">&times;</button>
 			</div>
@@ -37,6 +38,7 @@ if(!isset($element['variables'])){
 
 ?>
 </div>
+<?php do_action( 'caldera_forms_variables_config', $element ); ?>
 <script type="text/html" id="variable-fields-tmpl">
 	<div class="caldera-config-group">
 		<label style="padding:2px 0;"><input type="text" class="block-input field-config set-system-variable" name="config[variables][keys][]" value=""></label>
@@ -46,6 +48,7 @@ if(!isset($element['variables'])){
 		<select name="config[variables][types][]" class="field-config" style="vertical-align: baseline;">
 			<option value="static"><?php echo __('Static', 'caldera-forms'); ?></option>
 			<option value="passback"><?php echo __('Passback', 'caldera-forms'); ?></option>
+			<option value="entryitem"><?php echo __('Entry List', 'caldera-forms'); ?></option>
 		</select>
 		&nbsp;<button type="button" class="button remove-this-variable">&times;</button>
 	</div>
