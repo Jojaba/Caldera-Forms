@@ -303,12 +303,11 @@ class Caldera_Forms {
 	}
 
 	public static function handle_file_view($value, $field, $form){
-		if( is_array( $value ) ){
-			return $value;
+		$out = array();
+		foreach( (array) $value as $file_url ){
+			$out[] = '<a href="' . $file_url .'" target="_blank">' . basename($file_url) .'</a>';
 		}
-
-		return '<a href="' . $value .'" target="_blank">' . basename($value) .'</a>';
-
+		return implode(', ', $out );
 	}
 	
 	public static function mail_attachment_check($mail, $data, $form){
@@ -1560,6 +1559,24 @@ class Caldera_Forms {
 					),
 				)
 			),
+			'filtered_select2' => array(
+				"field"		=>	__( 'Autocomplete', 'caldera-forms' ),
+				"file"		=>	CFCORE_PATH . "fields/select2/field/field.php",
+				"category"	=>	__("Pickers,Select Options", "caldera-forms"),
+				"description" => 'Select2 dropdown',
+				"options"	=>	"multiple",
+				"static"	=> true,
+				"setup"		=>	array(
+					"template"	=>	CFCORE_PATH . "fields/select2/field/config.php",
+					"preview"	=>	CFCORE_PATH . "fields/select2/field/preview.php",
+				),
+				"scripts"	=> array(
+					CFCORE_URL . "fields/select2/js/select2.min.js",
+				),
+				"styles"	=> array(
+					CFCORE_URL . "fields/select2/css/select2.css",
+				)
+			)
 		);
 		
 		return array_merge( $fields, $internal_fields );
@@ -1620,7 +1637,7 @@ class Caldera_Forms {
 					 * @param array $form Config for the form.
 					 * @param array $posts Current post collection.
 					 */
-					$field_for_value = apply_filters( 'caldera_forms_autopopulate_options_post_value_field', 'ID', $field, $form, $posts  );
+					$field_for_value = apply_filters( 'caldera_forms_autopopulate_options_post_value_field', $field[ 'config' ][ 'value_field' ], $field, $form, $posts  );
 					$field[ 'config' ][ 'value_field' ] = $field_for_value;
 
 					/**
@@ -1658,7 +1675,7 @@ class Caldera_Forms {
 					 * @param array $form Config for the form.
 					 * @param array $posts Current term collection.
 					 */
-					$field_for_value = apply_filters( 'caldera_forms_autopopulate_options_taxonomy_value_field', 'term_id', $field, $form, $terms  );
+					$field_for_value = apply_filters( 'caldera_forms_autopopulate_options_taxonomy_value_field', $field[ 'config' ][ 'value_field' ], $field, $form, $terms  );
 					$field[ 'config' ][ 'value_field' ] = $field_for_value;
 
 					/**
